@@ -166,7 +166,7 @@ public class Robot extends TimedRobot
     
     Intake.griper(controller.getR2Button(), controller.getR1Button());
 
-    Arm.manuel(controller.getOptionsButton(), controller.getShareButton(), controller.getTriangleButton(), controller.getCircleButton(), controller.getCrossButton(), controller.getSquareButton());
+    Arm.manuel(controller.getOptionsButton(), controller.getShareButton(), controller.getTriangleButton(), controller.getCircleButton(), controller.getSquareButton(), controller.getCrossButton());
     
   }
 

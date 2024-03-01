@@ -54,11 +54,11 @@ public class RobotContainer
     configureBindings();
 
     AbsoluteDriveAdv closedAbsoluteDriveAdv = new AbsoluteDriveAdv(drivebase,
-                                                                   () -> MathUtil.applyDeadband(driverPS4.getLeftX(),
-                                                                                             OperatorConstants.LEFT_X_DEADBAND),
-                                                              () -> MathUtil.applyDeadband(driverPS4.getLeftY(),
-                                                                                                OperatorConstants.LEFT_Y_DEADBAND),
-                                                                   () -> MathUtil.applyDeadband(driverPS4.getRightX(),
+                                                                   () -> MathUtil.applyDeadband(driverPS4.getLeftY()*0.8,
+                                                                                            OperatorConstants.LEFT_Y_DEADBAND),
+                                                            () -> MathUtil.applyDeadband(driverPS4.getLeftX()*0.8,
+                                                                                                OperatorConstants.LEFT_X_DEADBAND),
+                                                                   () -> MathUtil.applyDeadband(driverPS4.getRightX()*-1,
                                                                                                 OperatorConstants.RIGHT_X_DEADBAND),
                                                                     driverPS4::getTriangleButtonPressed,
                                                                     driverPS4::getCrossButtonPressed,
@@ -71,10 +71,10 @@ public class RobotContainer
     // left stick controls translation 
     // right stick controls the desired angle NOT angular rotation
     Command driveFieldOrientedDirectAngle = drivebase.driveCommand(
-        () -> MathUtil.applyDeadband(driverPS4.getLeftX(), OperatorConstants.LEFT_X_DEADBAND),
-        () -> MathUtil.applyDeadband(driverPS4.getLeftY(), OperatorConstants.LEFT_Y_DEADBAND),
-        () -> driverPS4.getRightX(),
-        () -> driverPS4.getRightY());
+        () -> MathUtil.applyDeadband(driverPS4.getLeftY()*0.8, OperatorConstants.LEFT_Y_DEADBAND),
+        () -> MathUtil.applyDeadband(driverPS4.getLeftX()*0.8, OperatorConstants.LEFT_X_DEADBAND),
+        () -> driverPS4.getRightX()*-1,
+        () -> driverPS4.getRightY()*-1);
 
     // Applies deadbands and inverts controls because joysticks
     // are back-right positive while robot
@@ -83,13 +83,13 @@ public class RobotContainer
     // right stick controls the angular velocity of the robot
     //TODO change back to 2 if no work
     Command driveFieldOrientedAnglularVelocity = drivebase.driveCommand(
-        () -> MathUtil.applyDeadband(driverPS4.getLeftX(), OperatorConstants.LEFT_X_DEADBAND),
-        () -> MathUtil.applyDeadband(driverPS4.getLeftY(), OperatorConstants.LEFT_Y_DEADBAND),
-        () -> driverPS4.getRightX() * 0.5);
+        () -> MathUtil.applyDeadband(driverPS4.getLeftY()*0.8, OperatorConstants.LEFT_Y_DEADBAND),
+        () -> MathUtil.applyDeadband(driverPS4.getLeftX()*0.8, OperatorConstants.LEFT_X_DEADBAND),
+        () -> driverPS4.getRightX() * -0.5);
 
     Command driveFieldOrientedDirectAngleSim = drivebase.simDriveCommand(
-        () -> MathUtil.applyDeadband(driverPS4.getLeftX(), OperatorConstants.LEFT_X_DEADBAND),
-        () -> MathUtil.applyDeadband(driverPS4.getLeftY(), OperatorConstants.LEFT_Y_DEADBAND),
+        () -> MathUtil.applyDeadband(driverPS4.getLeftY()*0.8, OperatorConstants.LEFT_Y_DEADBAND),
+        () -> MathUtil.applyDeadband(driverPS4.getLeftX()*0.8, OperatorConstants.LEFT_X_DEADBAND),
         () -> driverPS4.getRawAxis(3));
 
     drivebase.setDefaultCommand(!RobotBase.isSimulation() ? driveFieldOrientedDirectAngle : driveFieldOrientedDirectAngleSim);
