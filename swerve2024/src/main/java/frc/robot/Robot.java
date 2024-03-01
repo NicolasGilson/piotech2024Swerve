@@ -9,10 +9,17 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.subsystems.swervedrive.arm;
+import frc.robot.subsystems.swervedrive.intake;
+import frc.robot.subsystems.swervedrive.shooter;
+
+//import frc.robot.subsystems.swervedrive.test;
+
 import java.io.File;
 import java.io.IOException;
 import swervelib.parser.SwerveParser;
 
+import edu.wpi.first.wpilibj.PS4Controller;
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to each mode, as
  * described in the TimedRobot documentation. If you change the name of this class or the package after creating this
@@ -20,6 +27,9 @@ import swervelib.parser.SwerveParser;
  */
 public class Robot extends TimedRobot
 {
+  intake Intake = new intake(11);
+  shooter Shooter = new shooter(12, 0);
+  arm Arm = new arm(9, 10, 0);
 
   private static Robot   instance;
   private        Command m_autonomousCommand;
@@ -27,6 +37,9 @@ public class Robot extends TimedRobot
   private RobotContainer m_robotContainer;
 
   private Timer disabledTimer;
+  private double time=0;
+  PS4Controller controller = new PS4Controller(0);
+  //test a = new test(0);
 
   public Robot()
   {
@@ -63,10 +76,19 @@ public class Robot extends TimedRobot
   @Override
   public void robotPeriodic()
   {
+    time+=1;
+    if(time>=(1000.0/50))
+    {
+      //System.out.println("a.encoderVal()");
+      System.out.println(Arm.encoderVal());
+      time=0;
+    }
     // Runs the Scheduler.  This is responsible for polling buttons, adding newly-scheduled
     // commands, running already-scheduled commands, removing finished or interrupted commands,
     // and running subsystem periodic() methods.  This must be called from the robot's periodic
     // block in order for anything in the Command-based framework to work.
+    //a.testb(IWKMS.getL2Button());
+    //a.testc(IWKMS.getR2Button());
     CommandScheduler.getInstance().run();
   }
 
@@ -118,6 +140,9 @@ public class Robot extends TimedRobot
   @Override
   public void teleopInit()
   {
+    //System.out.println(a.encoderVal());
+    //a.testc(IWKMS.getR2Button());
+    //a.testb(IWKMS.getL2Button());
     // This makes sure that the autonomous stops running when
     // teleop starts running. If you want the autonomous to
     // continue until interrupted by another command, remove
@@ -136,6 +161,16 @@ public class Robot extends TimedRobot
   @Override
   public void teleopPeriodic()
   {
+    //System.out.println(a.encoderVal());
+    Shooter.shoot(controller.getL2Button());
+    
+    Intake.griper(controller.getR2Button(), controller.getR1Button());
+
+    Arm.manuel(controller.getOptionsButton(), controller.getShareButton());
+
+    
+
+
   }
 
   @Override
@@ -158,6 +193,7 @@ public class Robot extends TimedRobot
   @Override
   public void testPeriodic()
   {
+
   }
 
   /**
