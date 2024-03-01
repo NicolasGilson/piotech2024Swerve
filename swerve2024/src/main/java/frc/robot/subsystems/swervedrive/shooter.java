@@ -28,9 +28,9 @@ public class shooter
     {
         if(balls)
         {
-            double speed =0.5;
+            double speed =0.8;
             shooterMotorA.set(speed);
-            shooterMotorB.set(speed);
+            shooterMotorB.set(speed + 0.2);
         }
         else 
         {

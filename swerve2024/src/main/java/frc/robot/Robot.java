@@ -28,7 +28,7 @@ import edu.wpi.first.wpilibj.PS4Controller;
 public class Robot extends TimedRobot
 {
   intake Intake = new intake(11);
-  shooter Shooter = new shooter(12, 0);
+  shooter Shooter = new shooter(12, 13);
   arm Arm = new arm(9, 10, 0);
 
   private static Robot   instance;
@@ -166,11 +166,8 @@ public class Robot extends TimedRobot
     
     Intake.griper(controller.getR2Button(), controller.getR1Button());
 
-    Arm.manuel(controller.getOptionsButton(), controller.getShareButton());
-
+    Arm.manuel(controller.getOptionsButton(), controller.getShareButton(), controller.getTriangleButton(), controller.getCircleButton(), controller.getCrossButton(), controller.getSquareButton());
     
-
-
   }
 
   @Override

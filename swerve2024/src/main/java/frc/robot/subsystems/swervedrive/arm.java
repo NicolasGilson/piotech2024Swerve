@@ -60,13 +60,13 @@ public class arm
      */
     public void angle(double speed, double theta)
     {
-        if(theta>armEncoder.get())
+        if(theta > (int)armEncoder.get())
         {
             armMotorA.set(speed);
             armMotorB.set(speed*-1);
             while(true)
             {
-                if(armEncoder.get()>=theta)
+                if((int)armEncoder.get() >=theta)
                 {
                     break;
                 }
@@ -78,24 +78,31 @@ public class arm
             armMotorB.set(speed);
             while(true)
             {
-                if(armEncoder.get()<=theta)
+                if((int)armEncoder.get() <=theta)
                 {
                     break;
                 }
             }
         }
-        armMotorA.set(0);
-        armMotorB.set(0);
     }
 
-    public void manuel(boolean up, boolean down){
+    public void manuel(boolean up, boolean down, boolean preSetT, boolean preSetO, boolean preSetX, boolean preSetS){
         if(up){
             armMotorA.set(0.1);
             armMotorB.set(-0.1);
         } else if (down){
             armMotorA.set(-0.1);
             armMotorB.set(0.1);
-        } else {
+        } else if (preSetT){
+            presetT();
+        } else if (preSetO){
+            presetO();
+        } else if (preSetX){
+            presetS();
+        } else if (preSetS){
+            presetX();
+        } else
+        {
             armMotorA.set(0);
             armMotorB.set(0);
         }
