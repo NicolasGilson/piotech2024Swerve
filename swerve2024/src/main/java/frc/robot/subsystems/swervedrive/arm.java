@@ -83,7 +83,7 @@ public class arm
         if(up){
             armMotorA.set(0.2);
             armMotorB.set(-0.2);
-        } if (down){
+        } else if (down){
             armMotorA.set(-0.2);
             armMotorB.set(0.2);
         } else if (preSetT){
@@ -94,8 +94,7 @@ public class arm
             presetS();
         } else if (preSetS){
             presetX();
-        } else
-        {
+        } else {
             armMotorA.set(0);
             armMotorB.set(0);
         }
