@@ -26,14 +26,14 @@ public class arm
     /**
      * set this to button 4 in robotContainer file in the configureBindings method replace if it alredy exist for that button
      */
-    public void presetT()
+    public void presetT() //Intake
     {
         angle(0.2, 1, 0.05);
     }
     /**
      * set this to button 3 in robotContainer file in the configureBindings method replace if it alredy exist for that button
      */
-    public void presetO()
+    public void presetO() //Shooter
     {
         angle(0.1, 0.916, 0.02);
     }
@@ -41,14 +41,14 @@ public class arm
      * set this to button 2 in robotContainer file in the configureBindings method replace if it alredy exist for that button
      */
     
-    public void presetX()
+    public void presetX() //1 pointer
     {
-        angle(0.1, 0.916, 0.5);
+        angle(0.1, 0.0702, 0.02);
     }
     /**
      * set this to button 1 in robotContainer file in the configureBindings method replace if it alredy exist for that button
      */
-    public void presetS()
+    public void presetS() //
     {
         angle(0.1, 0, 0.2);
     }
