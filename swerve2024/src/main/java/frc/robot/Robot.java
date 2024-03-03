@@ -141,13 +141,20 @@ public class Robot extends TimedRobot
   @Override
   public void autonomousPeriodic()
   {
-    if(elapsedTime.get() < 2){
+
+    if (elapsedTime.get() < 2){
+      arm.manuel(false, true, false, false, false, false);
+    } else {
+      arm.manuel(false, false, false, false, false, false);
+    }
+
+    if(elapsedTime.get() > 2 && elapsedTime.get() < 4){
       shooter.shoot(true);
     } else {
       shooter.shoot(false);
     }
 
-    if(elapsedTime.get() > 1.5 && elapsedTime.get() < 2){
+    if(elapsedTime.get() > 3 && elapsedTime.get() < 4){
       intake.griper(true, false);
     } else {
       intake.griper(false, false);
