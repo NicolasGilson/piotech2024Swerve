@@ -120,19 +120,21 @@ public class Robot extends TimedRobot
   @Override
   public void autonomousInit()
   {
-    /*m_robotContainer.setMotorBrake(true);
-    m_autonomousCommand = m_robotContainer.getAutonomousCommand();
-
+    
+    m_robotContainer.setMotorBrake(true);
     // schedule the autonomous command (example)
-    if (m_autonomousCommand != null)
+    /*if (m_autonomousCommand != null)
     {
       m_autonomousCommand.schedule();
       
-    }
-    */
+    }*/
+    
 
     elapsedTime.reset();
     elapsedTime.start();
+    
+
+    
   }
 
   /**
@@ -142,7 +144,7 @@ public class Robot extends TimedRobot
   public void autonomousPeriodic()
   {
 
-    if (elapsedTime.get() < 2){
+    if (elapsedTime.get() < 2.2){
       arm.manuel(false, true, false, false, false, false);
     } else {
       arm.manuel(false, false, false, false, false, false);
@@ -159,6 +161,20 @@ public class Robot extends TimedRobot
     } else {
       intake.griper(false, false);
     }
+    if(elapsedTime.get()>4 && elapsedTime.get() < 6)
+    {
+      m_autonomousCommand = RobotContainer.getAutonomousCommand();
+      m_autonomousCommand.schedule();
+    }
+    /*if(elapsedTime.get()>4 && elapsedTime.get() < 6)
+    {
+      SwerveSubsystem.auton(-0.0,0.0,0.0,0.0);
+    }
+    else
+    {
+      SwerveSubsystem.auton(0.0,0.0,0.0,0.0);
+    }*/
+
   }
 
   @Override
