@@ -5,7 +5,7 @@ import com.revrobotics.CANSparkLowLevel.MotorType;
 
 public class intake 
 {
-    private final CANSparkMax intakeMotor;
+    private static CANSparkMax intakeMotor = new CANSparkMax(11, MotorType.kBrushless);
 
     /**
      * @param intakeMotorID the CAN bus ID
@@ -19,7 +19,7 @@ public class intake
      * do this in the teleopPeriodic
      * @param gripers the boolean value of the button
      */
-    public void griper(boolean froward, boolean backward)
+    public static void griper(boolean froward, boolean backward)
     {
         if(froward)
         {

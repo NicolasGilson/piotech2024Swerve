@@ -50,13 +50,14 @@ public class RobotContainer
    */
   public RobotContainer()
   {
+    double speedmult= 1;
     // Configure the trigger bindings
     configureBindings();
 
     AbsoluteDriveAdv closedAbsoluteDriveAdv = new AbsoluteDriveAdv(drivebase,
-                                                                   () -> MathUtil.applyDeadband(driverPS4.getLeftY()*0.8,
+                                                                   () -> MathUtil.applyDeadband(driverPS4.getLeftY()*speedmult,
                                                                                             OperatorConstants.LEFT_Y_DEADBAND),
-                                                            () -> MathUtil.applyDeadband(driverPS4.getLeftX()*0.8,
+                                                            () -> MathUtil.applyDeadband(driverPS4.getLeftX()*speedmult,
                                                                                                 OperatorConstants.LEFT_X_DEADBAND),
                                                                    () -> MathUtil.applyDeadband(driverPS4.getRightX()*-1,
                                                                                                 OperatorConstants.RIGHT_X_DEADBAND),
@@ -71,8 +72,8 @@ public class RobotContainer
     // left stick controls translation 
     // right stick controls the desired angle NOT angular rotation
     Command driveFieldOrientedDirectAngle = drivebase.driveCommand(
-        () -> MathUtil.applyDeadband(driverPS4.getLeftY()*0.8, OperatorConstants.LEFT_Y_DEADBAND),
-        () -> MathUtil.applyDeadband(driverPS4.getLeftX()*0.8, OperatorConstants.LEFT_X_DEADBAND),
+        () -> MathUtil.applyDeadband(driverPS4.getLeftY()*speedmult, OperatorConstants.LEFT_Y_DEADBAND),
+        () -> MathUtil.applyDeadband(driverPS4.getLeftX()*speedmult, OperatorConstants.LEFT_X_DEADBAND),
         () -> driverPS4.getRightX()*-1,
         () -> driverPS4.getRightY()*-1);
 
@@ -83,13 +84,13 @@ public class RobotContainer
     // right stick controls the angular velocity of the robot
     //TODO change back to 2 if no work
     Command driveFieldOrientedAnglularVelocity = drivebase.driveCommand(
-        () -> MathUtil.applyDeadband(driverPS4.getLeftY()*0.8, OperatorConstants.LEFT_Y_DEADBAND),
-        () -> MathUtil.applyDeadband(driverPS4.getLeftX()*0.8, OperatorConstants.LEFT_X_DEADBAND),
+        () -> MathUtil.applyDeadband(driverPS4.getLeftY()*speedmult, OperatorConstants.LEFT_Y_DEADBAND),
+        () -> MathUtil.applyDeadband(driverPS4.getLeftX()*speedmult, OperatorConstants.LEFT_X_DEADBAND),
         () -> driverPS4.getRightX() * -0.5);
 
     Command driveFieldOrientedDirectAngleSim = drivebase.simDriveCommand(
-        () -> MathUtil.applyDeadband(driverPS4.getLeftY()*0.8, OperatorConstants.LEFT_Y_DEADBAND),
-        () -> MathUtil.applyDeadband(driverPS4.getLeftX()*0.8, OperatorConstants.LEFT_X_DEADBAND),
+        () -> MathUtil.applyDeadband(driverPS4.getLeftY()*speedmult, OperatorConstants.LEFT_Y_DEADBAND),
+        () -> MathUtil.applyDeadband(driverPS4.getLeftX()*speedmult, OperatorConstants.LEFT_X_DEADBAND),
         () -> driverPS4.getRawAxis(3));
 
     drivebase.setDefaultCommand(!RobotBase.isSimulation() ? driveFieldOrientedDirectAngle : driveFieldOrientedDirectAngleSim);

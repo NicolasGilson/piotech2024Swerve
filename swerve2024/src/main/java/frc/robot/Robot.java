@@ -37,6 +37,7 @@ public class Robot extends TimedRobot
   private RobotContainer m_robotContainer;
 
   private Timer disabledTimer;
+  private Timer elapsedTime = new Timer();;
   private double time=0;
   PS4Controller controller = new PS4Controller(0);
   //test a = new test(0);
@@ -129,6 +130,9 @@ public class Robot extends TimedRobot
       
     }
     */
+
+    elapsedTime.reset();
+    elapsedTime.start();
   }
 
   /**
@@ -137,6 +141,17 @@ public class Robot extends TimedRobot
   @Override
   public void autonomousPeriodic()
   {
+    if(elapsedTime.get() < 2){
+      shooter.shoot(true);
+    } else {
+      shooter.shoot(false);
+    }
+
+    if(elapsedTime.get() > 1.5 && elapsedTime.get() < 2){
+      intake.griper(true, false);
+    } else {
+      intake.griper(false, false);
+    }
   }
 
   @Override

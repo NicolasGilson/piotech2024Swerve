@@ -6,8 +6,8 @@ import com.revrobotics.CANSparkLowLevel.MotorType;
 
 public class shooter 
 {
-    private final CANSparkMax shooterMotorA;
-    private final WPI_VictorSPX shooterMotorB;
+    private static CANSparkMax shooterMotorA = new CANSparkMax(12, MotorType.kBrushless);
+    private static WPI_VictorSPX shooterMotorB = new WPI_VictorSPX(13);
     /**
      * 
      * @param shooterAID the CAN bus ID
@@ -24,7 +24,7 @@ public class shooter
      * @param balls the boolean value of the button
      */
     //TODO the speeds might be diffrent so set the speeds acordingly
-    public void shoot(boolean balls)
+    public static void shoot(boolean balls)
     {
         if(balls)
         {
@@ -37,5 +37,12 @@ public class shooter
             shooterMotorA.set(0);
             shooterMotorB.set(0);
         }
+    }
+
+    public static void shoot(){
+        double speed =0.8;
+        shooterMotorA.set(speed);
+        shooterMotorB.set(speed + 0.2);
+
     }
 }
